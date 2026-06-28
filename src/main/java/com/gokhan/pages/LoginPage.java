@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import com.gokhan.config.FrameworkConfig;
 
 public class LoginPage {
 
@@ -32,7 +33,7 @@ public class LoginPage {
     }
 
     public String getSuccessMessage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConfig.DEFAULT_WAIT_SECONDS));
         WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
         return message.getText();
     }
