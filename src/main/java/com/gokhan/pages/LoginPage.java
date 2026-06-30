@@ -14,7 +14,7 @@ public class LoginPage {
     private By usernameInput = By.id("username");
     private By passwordInput = By.id("password");
     private By loginButton = By.id("submit-login");
-    private By successMessage = By.id("flash");
+    private By flashMessage = By.id("flash");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -32,9 +32,9 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
-    public String getSuccessMessage() {
+    public String getFlashMessage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConfig.DEFAULT_WAIT_SECONDS));
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(flashMessage));
         return message.getText();
     }
 }
