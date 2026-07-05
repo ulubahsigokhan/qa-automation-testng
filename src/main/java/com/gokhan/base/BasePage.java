@@ -40,14 +40,19 @@ public class BasePage {
 
 
     protected void type(By locator, String text) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = find(locator);
         element.clear();
         element.sendKeys(text);
     }
 
 
     protected String getText(By locator) {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = find(locator);
         return element.getText();
+    }
+
+
+    protected WebElement find(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }
