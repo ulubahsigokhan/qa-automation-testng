@@ -30,8 +30,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getFlashMessage() {
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(flashMessage));
-        return message.getText();
+        return getText(flashMessage);
     }
 }
 
