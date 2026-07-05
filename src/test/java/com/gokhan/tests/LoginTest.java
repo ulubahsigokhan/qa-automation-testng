@@ -19,6 +19,9 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(LoginTestData.VALID_USERNAME);
         loginPage.enterPassword(LoginTestData.VALID_PASSWORD);
         loginPage.clickLoginButton();
+
+        Assert.assertTrue(loginPage.isFlashMessageDisplayed(), "Flash message was not displayed");
+
         String actualResult = loginPage.getFlashMessage();
         String expectedResult = LoginTestData.SUCCESS_MESSAGE;
         Assert.assertTrue(actualResult.contains(expectedResult), "Login failed!");
@@ -33,6 +36,9 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(LoginTestData.INVALID_USERNAME);
         loginPage.enterPassword(LoginTestData.INVALID_PASSWORD);
         loginPage.clickLoginButton();
+
+        Assert.assertTrue(loginPage.isFlashMessageDisplayed(), "Flash message was not displayed");
+
         String actualResult = loginPage.getFlashMessage();
         String expectedResult = LoginTestData.INVALID_PASSWORD_MESSAGE;
         Assert.assertTrue(actualResult.contains(expectedResult), "Invalid login error message was not displayed");
