@@ -9,12 +9,15 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
+    private LoginPage openLoginPage() {
+        driver.get(FrameworkConfig.BASE_URL + FrameworkConfig.LOGIN_PATH);
+        return new LoginPage(driver);
+    }
+
     @Test
     public void validLoginTest() {
 
-        driver.get(FrameworkConfig.BASE_URL + FrameworkConfig.LOGIN_PATH);
-
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = openLoginPage();
 
         loginPage.enterUsername(LoginTestData.VALID_USERNAME);
         loginPage.enterPassword(LoginTestData.VALID_PASSWORD);
@@ -30,9 +33,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void invalidLoginTest() {
 
-        driver.get(FrameworkConfig.BASE_URL + FrameworkConfig.LOGIN_PATH);
+        LoginPage loginPage = openLoginPage();
 
-        LoginPage loginPage = new LoginPage(driver);
         loginPage.enterUsername(LoginTestData.INVALID_USERNAME);
         loginPage.enterPassword(LoginTestData.INVALID_PASSWORD);
         loginPage.clickLoginButton();
