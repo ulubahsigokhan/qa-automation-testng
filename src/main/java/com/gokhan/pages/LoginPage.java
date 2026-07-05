@@ -1,7 +1,9 @@
 package com.gokhan.pages;
 
 import com.gokhan.base.BasePage;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
@@ -24,18 +26,7 @@ public class LoginPage extends BasePage {
     }
 
     public void clickLoginButton() {
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(loginButton));
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
-                button
-        );
-
-        try {
-            button.click();
-        } catch (ElementClickInterceptedException | TimeoutException e) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
-        }
+        click(loginButton);
     }
 
     public String getFlashMessage() {
