@@ -22,6 +22,7 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConfig.DEFAULT_WAIT_SECONDS));
     }
 
+
     protected void click(By locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
 
@@ -35,5 +36,12 @@ public class BasePage {
         } catch (ElementClickInterceptedException | TimeoutException e) {
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
         }
+    }
+
+
+    protected void type(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        element.clear();
+        element.sendKeys(text);
     }
 }
