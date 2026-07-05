@@ -4,10 +4,14 @@ import com.gokhan.base.BaseTest;
 import com.gokhan.config.FrameworkConfig;
 import com.gokhan.pages.LoginPage;
 import com.gokhan.testdata.LoginTestData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
+
+    private static final Logger log = LoggerFactory.getLogger(LoginTest.class);
 
     private LoginPage openLoginPage() {
         driver.get(FrameworkConfig.BASE_URL + FrameworkConfig.LOGIN_PATH);
@@ -18,10 +22,7 @@ public class LoginTest extends BaseTest {
     public void validLoginTest() {
 
         LoginPage loginPage = openLoginPage();
-
-        loginPage.enterUsername(LoginTestData.VALID_USERNAME);
-        loginPage.enterPassword(LoginTestData.VALID_PASSWORD);
-        loginPage.clickLoginButton();
+        loginPage.login(LoginTestData.VALID_USERNAME, LoginTestData.VALID_PASSWORD);
 
         Assert.assertTrue(loginPage.isFlashMessageDisplayed(), "Flash message was not displayed");
 
@@ -34,10 +35,7 @@ public class LoginTest extends BaseTest {
     public void invalidLoginTest() {
 
         LoginPage loginPage = openLoginPage();
-
-        loginPage.enterUsername(LoginTestData.INVALID_USERNAME);
-        loginPage.enterPassword(LoginTestData.INVALID_PASSWORD);
-        loginPage.clickLoginButton();
+        loginPage.login(LoginTestData.INVALID_USERNAME, LoginTestData.INVALID_PASSWORD);
 
         Assert.assertTrue(loginPage.isFlashMessageDisplayed(), "Flash message was not displayed");
 

@@ -15,29 +15,31 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-
     public void enterUsername(String username) {
         type(usernameInput, username);
     }
-
 
     public void enterPassword(String password) {
         type(passwordInput, password);
     }
 
-
     public void clickLoginButton() {
         click(loginButton);
     }
 
+    public void login(String username, String password) {
+        enterUsername(username);
+        enterPassword(password);
+        clickLoginButton();
+    }
 
     public String getFlashMessage() {
         return getText(flashMessage);
     }
 
-
     public boolean isFlashMessageDisplayed() {
         return isDisplayed(flashMessage);
     }
+
 }
 
