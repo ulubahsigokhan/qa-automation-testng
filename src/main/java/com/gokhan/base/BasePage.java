@@ -55,4 +55,9 @@ public class BasePage {
     protected WebElement find(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+
+    protected boolean isDisplayed(By locator) {
+        return find(locator).isDisplayed();
+    }
 }
