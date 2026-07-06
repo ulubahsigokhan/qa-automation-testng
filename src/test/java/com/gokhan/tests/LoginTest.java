@@ -17,7 +17,8 @@ public class LoginTest extends BaseTest {
     private void assertFlashMessageContains(LoginPage loginPage, String expectedMessage) {
         Assert.assertTrue(loginPage.isFlashMessageDisplayed(), "Flash message was not displayed");
         String actualResult = loginPage.getFlashMessage();
-        Assert.assertTrue(actualResult.contains(expectedMessage),
+        Assert.assertTrue(
+                actualResult.contains(expectedMessage),
                 "Flash message text was not correct. Expected: " + expectedMessage + " Actual: " + actualResult);
     }
 
