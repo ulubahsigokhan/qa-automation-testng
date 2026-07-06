@@ -13,8 +13,18 @@ public class LoginTest extends BaseTest {
     @DataProvider
     private Object[][] loginData() {
         return new Object[][] {
-                {LoginTestData.VALID_USERNAME, LoginTestData.VALID_PASSWORD, LoginTestData.SUCCESS_MESSAGE},
-                {LoginTestData.INVALID_USERNAME, LoginTestData.INVALID_PASSWORD, LoginTestData.INVALID_PASSWORD_MESSAGE}
+                {
+                        "Valid login",
+                        LoginTestData.VALID_USERNAME,
+                        LoginTestData.VALID_PASSWORD,
+                        LoginTestData.SUCCESS_MESSAGE
+                },
+                {
+                        "Invalid password login",
+                        LoginTestData.INVALID_USERNAME,
+                        LoginTestData.INVALID_PASSWORD,
+                        LoginTestData.INVALID_PASSWORD_MESSAGE
+                }
         };
     }
 
@@ -23,18 +33,35 @@ public class LoginTest extends BaseTest {
         return new LoginPage(driver);
     }
 
-    private void assertFlashMessageContains(LoginPage loginPage, String expectedMessage) {
-        Assert.assertTrue(loginPage.isFlashMessageDisplayed(), "Flash message was not displayed");
+    private void assertFlashMessageContains(
+            String scenarioName,
+            LoginPage loginPage,
+            String expectedMessage
+    ) {
+        Assert.assertTrue(
+                loginPage.isFlashMessageDisplayed(),
+                "Flash message was not displayed for scenario: " + scenarioName
+        );
+
         String actualResult = loginPage.getFlashMessage();
+
         Assert.assertTrue(
                 actualResult.contains(expectedMessage),
-                "Flash message text was not correct. Expected: " + expectedMessage + " Actual: " + actualResult);
+                "Flash message text was not correct for scenario: " + scenarioName
+                        + ". Expected: " + expectedMessage
+                        + " Actual: " + actualResult
+        );
     }
 
     @Test(dataProvider = "loginData")
-    public void loginShouldDisplayExpectedFlashMessage(String username, String password, String expectedMessage) {
+    public void loginShouldDisplayExpectedFlashMessage(
+            String scenarioName,
+            String username,
+            String password,
+            String expectedMessage
+    ) {
         LoginPage loginPage = openLoginPage();
         loginPage.login(username, password);
-        assertFlashMessageContains(loginPage, expectedMessage);
+        assertFlashMessageContains(scenarioName, loginPage, expectedMessage);
     }
 }
