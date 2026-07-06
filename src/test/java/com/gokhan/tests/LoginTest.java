@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @DataProvider
+    @DataProvider(name = "loginData")
     private Object[][] loginData() {
         return new Object[][] {
                 {
