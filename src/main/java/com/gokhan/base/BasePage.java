@@ -22,6 +22,9 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConfig.DEFAULT_WAIT_SECONDS));
     }
 
+    protected WebElement find(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 
     protected void click(By locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -38,24 +41,16 @@ public class BasePage {
         }
     }
 
-
     protected void type(By locator, String text) {
         WebElement element = find(locator);
         element.clear();
         element.sendKeys(text);
     }
 
-
     protected String getText(By locator) {
         WebElement element = find(locator);
         return element.getText();
     }
-
-
-    protected WebElement find(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
 
     protected boolean isDisplayed(By locator) {
         return find(locator).isDisplayed();
