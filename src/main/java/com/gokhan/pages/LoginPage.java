@@ -1,7 +1,6 @@
 package com.gokhan.pages;
 
 import com.gokhan.base.BasePage;
-import com.gokhan.config.FrameworkConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -32,10 +31,6 @@ public class LoginPage extends BasePage {
         enterUsername(username);
         enterPassword(password);
         clickLoginButton();
-    }
-
-    public void waitForSuccessfulLogin() {
-        waitForUrlContains(FrameworkConfig.SECURE_PATH);
     }
 
     public String getFlashMessage() {

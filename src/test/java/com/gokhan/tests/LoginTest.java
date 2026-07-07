@@ -3,6 +3,7 @@ package com.gokhan.tests;
 import com.gokhan.base.BaseTest;
 import com.gokhan.config.FrameworkConfig;
 import com.gokhan.pages.LoginPage;
+import com.gokhan.pages.SecurePage;
 import com.gokhan.testdata.LoginTestData;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -67,7 +68,8 @@ public class LoginTest extends BaseTest {
         loginPage.login(username, password);
 
         if (shouldRedirectToSecure) {
-            loginPage.waitForSuccessfulLogin();
+            SecurePage securePage = new SecurePage(driver);
+            securePage.waitForPageToLoad();
         }
 
         assertFlashMessageContains(scenarioName, loginPage, expectedMessage);
