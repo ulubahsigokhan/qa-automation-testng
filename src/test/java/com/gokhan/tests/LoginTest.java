@@ -17,13 +17,15 @@ public class LoginTest extends BaseTest {
                         "Valid login",
                         LoginTestData.VALID_USERNAME,
                         LoginTestData.VALID_PASSWORD,
-                        LoginTestData.SUCCESS_MESSAGE
+                        LoginTestData.SUCCESS_MESSAGE,
+                        true
                 },
                 {
                         "Invalid password login",
                         LoginTestData.INVALID_USERNAME,
                         LoginTestData.INVALID_PASSWORD,
-                        LoginTestData.INVALID_PASSWORD_MESSAGE
+                        LoginTestData.INVALID_PASSWORD_MESSAGE,
+                        false
                 }
         };
     }
@@ -58,10 +60,16 @@ public class LoginTest extends BaseTest {
             String scenarioName,
             String username,
             String password,
-            String expectedMessage
+            String expectedMessage,
+            boolean shouldRedirectToSecure
     ) {
         LoginPage loginPage = openLoginPage();
         loginPage.login(username, password);
+
+        if (shouldRedirectToSecure) {
+            loginPage.waitForSuccessfulLogin();
+        }
+
         assertFlashMessageContains(scenarioName, loginPage, expectedMessage);
     }
 }

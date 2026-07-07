@@ -26,6 +26,10 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    protected void waitForUrlContains(String partialUrl) {
+        wait.until(ExpectedConditions.urlContains(partialUrl));
+    }
+
     protected void click(By locator) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
 
