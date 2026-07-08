@@ -70,6 +70,10 @@ public class LoginTest extends BaseTest {
         if (shouldRedirectToSecure) {
             SecurePage securePage = new SecurePage(driver);
             securePage.waitForPageToLoad();
+            Assert.assertTrue(
+                    securePage.isSecurePageHeadingDisplayed(),
+                    "Secure page heading was not displayed for scenario: " + scenarioName
+            );
         }
 
         assertFlashMessageContains(scenarioName, loginPage, expectedMessage);
