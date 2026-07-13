@@ -2,6 +2,9 @@ package com.gokhan.config;
 
 public class FrameworkConfig {
 
+    private FrameworkConfig() {
+    }
+
     public static final String BASE_URL = "https://practice.expandtesting.com";
     public static final String LOGIN_PATH = "/login";
     public static final String SECURE_PATH = "/secure";

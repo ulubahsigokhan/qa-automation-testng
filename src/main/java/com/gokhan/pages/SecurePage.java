@@ -7,7 +7,10 @@ import org.openqa.selenium.WebDriver;
 
 public class SecurePage extends BasePage {
 
-    private By securePageHeading = By.xpath("//h1[text()='Secure Area page for Automation Testing Practice']");
+    private By securePageHeading = By.xpath(
+            "//h1[text()='Secure Area page for Automation Testing Practice']");
+    private By demosDropdown = By.id("examples-dropdown");
+    private By examplesDropdownOption = By.linkText("Examples");
 
     public SecurePage(WebDriver driver) {
         super(driver);
@@ -19,6 +22,14 @@ public class SecurePage extends BasePage {
 
     public boolean isSecurePageHeadingDisplayed() {
         return isDisplayed(securePageHeading);
+    }
+
+    public void openDemosDropdown() {
+        click(demosDropdown);
+    }
+
+    public boolean isExamplesDropdownOptionDisplayed() {
+        return isDisplayed(examplesDropdownOption);
     }
 }
 
