@@ -16,22 +16,22 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
+        switch (FrameworkConfig.BROWSER.toLowerCase()) {
+            case "chrome":
+                ChromeOptions options = new ChromeOptions();
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+                driver = new ChromeDriver(options);
+                break;
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+            default:
+                throw new RuntimeException("Unsupported browser: " + FrameworkConfig.BROWSER);
 
-        if (FrameworkConfig.BROWSER.equalsIgnoreCase("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-            driver = new ChromeDriver(options);
         }
-        else if (FrameworkConfig.BROWSER.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
-        }
-        else if (FrameworkConfig.BROWSER.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
-        }
-        else {
-            throw new RuntimeException("Unsupported browser: " + FrameworkConfig.BROWSER);
-        }
-
         driver.manage().window().maximize();
     }
 
